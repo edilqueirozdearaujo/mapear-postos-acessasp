@@ -1,0 +1,118 @@
+
+#mapdiv{
+	height: 600px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#mapdiv-mini{
+	height: 350px;
+	width:  450px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	float: left;
+
+/*border: solid 1px;*/	
+}
+
+
+#mapdiv-print{
+	height: 12cm;
+	width:  100%;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	float: left;
+
+	border: solid 0.6mm #D3D3D3;	
+}
+
+
+#poi-detalhes{
+	height: 350px;
+	width:  450px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	float: left;
+
+/*border: solid 1px;*/	
+}
+
+
+
+    .page-area {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1.8cm;
+        margin: 1cm auto;
+        border: solid 0.6mm #D3D3D3;
+        border-radius: 5px;
+        background: white;
+        box-shadow: 0 0 1mm rgba(0, 0, 0, 0.1);
+    }
+
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    @media print {
+        .page-area {
+            margin: 0;
+            border: initial;
+            border-radius: initial;
+            width: initial;
+            min-height: initial;
+            box-shadow: initial;
+            background: initial;
+            page-break-after: always;
+        }
+    }
+
+
+
+
+
+.poi-veronde{
+	width: auto;
+	display: inline-table;
+	background-color: #F3F3F3;
+	padding: 4px;
+	margin: 2px;
+	margin-left: 3px;
+	margin-right: 3px;
+	font-size: 120%;
+}
+
+.poi-veronde img{
+	vertical-align: middle;
+}
+
+
+#formpesquisa{
+	color: #4D4D4D;
+}
+
+#formpesquisa input{
+	font-size: 15px;
+	color: #4D4D4D;
+}
+
+.btnPesquisar{
+	background-color: #2263D4;
+	color: white;
+	border-color: #2263D4;
+	font-weight: bolder;
+}
+
+
+
+.btnFechar{
+	background-color: red;
+	color: white;
+	border-color: red;
+	font-size: 15px;
+}
+
+.btnImprimir{
+	font-size: 15px;
+}
+
