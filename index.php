@@ -126,7 +126,8 @@ include_once "include/leaflet.php";
 	
 			L.marker([-21.4829998016357,-51.5331993103027], {
 				title :'teste de marcador'
-			}).addTo(layerG_normal);
+			}).bindPopup("<b>TESTE</b><br>teste de marcador").addTo(layerG_normal);
+			
 			 
  map.featureLayer.on('click', function(e) {
      map.panTo(e.layer.getLatLng());
