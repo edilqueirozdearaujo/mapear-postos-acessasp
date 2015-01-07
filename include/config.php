@@ -15,9 +15,11 @@
 	define("cDBUser","");
 	define("cDBPass","");
 
-	$TbPrefix = "";
+	define("cMapboxAccessToken","your-Mapbox-Access-Token"); // -> Learn more: https://www.mapbox.com/mapbox.js/
 
+	$TbPrefix = "";
 	define("cTbPostos",$TbPrefix."PostosAcessa");
+	
 
 	//Fields from Postos table	
 	$cFdPtID           = "ID";

@@ -16,3 +16,4 @@ var layer_IBGEu    = L.tileLayer('https://{s}.tiles.mapbox.com/v3/tmpsantos.hgda
 var layer_MapBox    = L.tileLayer('https://{s}.tiles.mapbox.com/v3/openstreetmap.map-inh7ifmo/{z}/{x}/{y}.png', {attribution: attrMapBox} );
 var layer_StamenWater = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {attribution: attrStamen} ); 
 
+
