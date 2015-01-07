@@ -95,53 +95,13 @@ include_once "include/leaflet.php";
 <body>
 	<?	
 //		Linha( "<div class='meio'" );
-		   if( isset($NoneNoneNone)) {
-		   }
-			//Else, is the start
-			else {
-				
-				
-			
-			}		
-	?>
+	   if( isset($NoneNoneNone)) {
+	   }
+		//Else, is the start
+		else {
+			DesenharMapa("mapdiv");
+		}		
 
-
-	<div id='mapdiv'></div>
-	<script>
-			L.mapbox.accessToken = '<? echo cMapboxAccessToken; ?>';
-			var map = L.mapbox.map('mapdiv');
-			layer_mapnik.addTo(map);
-		
-			
-			var layerG_normal= new L.mapbox.featureLayer();
-
-			L.control.layers({
-			    'OpenStreetMap': layer_mapnik,
-			    'Ciclistas'    : layer_cycle
-			},{
-             'Normal'       : layerG_normal			
-			}
-			
-			).addTo(map);
-	
-			L.marker([-21.4829998016357,-51.5331993103027], {
-				title :'teste de marcador'
-			}).bindPopup("<b>TESTE</b><br>teste de marcador").addTo(layerG_normal);
-			
-			 
- map.featureLayer.on('click', function(e) {
-     map.panTo(e.layer.getLatLng());
- });	
-
-			map.setView([-22.53514,-48.36743], 7);
-	
-
-
-	</script>
-
-
-	
-	<?
 	    TryShowError($ErrosNaPagina);
 //	 Linha( "</div>" );
 

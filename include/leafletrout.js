@@ -17,3 +17,6 @@ var layer_MapBox    = L.tileLayer('https://{s}.tiles.mapbox.com/v3/openstreetmap
 var layer_StamenWater = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {attribution: attrStamen} ); 
 
 
+var layer_mapear  = new L.mapbox.featureLayer();
+var layer_editado = new L.mapbox.featureLayer();
+var layer_noosm   = new L.mapbox.featureLayer();

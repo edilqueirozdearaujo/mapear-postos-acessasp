@@ -18,6 +18,83 @@
            ."</ul>";
 
 
+/*	Linha("			L.marker([-21.4829998016357,-51.5331993103027], {");
+	Linha("				title :'teste de marcador'");
+	Linha("			}).bindPopup('b>TESTE</b><br>teste de marcador').addTo(layer_editado);");
+	Linha("						 ");
+*/
+
+function Legenda($PcMapear,$PcEdit,$PcNoosm,$Total) {
+	Linha("	<!-- A legenda é dinâmica, então o estilo também... por isso está aqui 	-->");
+	Linha("	<style>");
+	Linha("			#lgdmapear{");
+	Linha("			  width: ".$PcMapear."%;			");
+	Linha("			  background:#74A9CF;");
+	Linha("			}");
+	Linha("			#lgdeditados{");
+	Linha("			  width: ".$PcEdit."%;");
+	Linha("			  background:#FE492D;");
+	Linha("			}");
+	Linha("			#lgdnoosm{");
+	Linha("			  width: ".$PcNoosm."%;");
+	Linha("			  background:#75E775;");
+	Linha("			}");
+	Linha("	</style>");
+	Linha("	<!-- Set the display of this container to none so we can add it programmatically to `legendControl`");
+	Linha("	source: https://www.mapbox.com/mapbox.js/example/v1.0.0/custom-legend/ -->");
+	Linha("	<div id='legend' style='display:none;'>");
+	Linha("	  <strong>Mapeamento dos Postos do Acessa SP</strong>");
+	Linha("	  <nav class='legend clearfix'>");
+	Linha("	    <span id='lgdmapear'></span>");
+	Linha("	    <span id='lgdeditados'></span>");
+	Linha("	    <span id='lgdnoosm'></span>");
+	Linha("	    <label>A mapear: ".$PcMapear."%</label>");
+	Linha("	    <label>Editados: ".$PcEdit  ."%</label>");
+	Linha("	    <label>No mapa:  ".$PcNoosm ."%</label>");
+	Linha("	    <strong>Total: $Total | <b>Pesquisar um posto</b></strong>");
+	Linha("	  </nav>	    ");
+	Linha("	</div>");
+}
+
+function DesenharMapa($MapDiv) {
+	Legenda(90,2,8,988);
+	
+	Linha("");
+	Linha("	<div id='$MapDiv'></div>");
+	Linha("	<script>");
+	Linha("			L.mapbox.accessToken = '" . cMapboxAccessToken ."';");
+	Linha("			var map = L.mapbox.map('$MapDiv');");
+	Linha("");
+	Linha("			//Default layer to show");
+	Linha("			layer_mapnik.addTo(map);  ");
+	Linha("			layer_editado.addTo(map); ");
+	Linha("			layer_noosm.addTo(map);");
+	Linha("");
+	Linha("			L.control.layers({");
+	Linha("			    'OpenStreetMap': layer_mapnik,");
+	Linha("			    'Ciclistas'    : layer_cycle");
+	Linha("			},{");
+	Linha("             'A mapear'      : layer_mapear,");
+	Linha("             'Editados'      : layer_editado,");
+	Linha("             'No Mapa'       : layer_noosm			");
+	Linha("			}");
+	Linha("			).addTo(map);");
+	Linha("	");
+	Linha("	");
+	
+	//Marcadores são adicionados aqui 
+
+
+	Linha("");
+	Linha("			map.setView([-22.53514,-48.36743], 7);");
+	Linha("			map.legendControl.addLegend(document.getElementById('legend').innerHTML);");
+	Linha("	</script>");
+
+
+}
+
+
+
 function DesenharForm($Nome,$Rua,$Numero,$Bairro,$CEP,$Telefone,$Email,$ID,$Lat,$Lon,$NoOSM){ 
    global $MinhaURL;      
    $NoOSM0 = " checked='true' "; 
