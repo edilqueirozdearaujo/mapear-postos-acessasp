@@ -59,9 +59,15 @@ function Legenda($PcMapear,$PcEdit,$PcNoosm,$Total) {
 function DesenharMapa($MapDiv) {
 	Legenda(90,2,8,988);
 	
+	
 	Linha("");
 	Linha("	<div id='$MapDiv'></div>");
 	Linha("	<script>");
+	Linha("			//Ajusta altura do mapa de acordo com a tela - não se esqueça da unidade de medida");
+	Linha("			var ScreenH = (GetScreenHeight() -20);");
+	Linha("			var ScreenH = ScreenH + 'px';");
+	Linha("			document.getElementById('$MapDiv').style.height = ScreenH;");
+	Linha("");
 	Linha("			L.mapbox.accessToken = '" . cMapboxAccessToken ."';");
 	Linha("			var map = L.mapbox.map('$MapDiv');");
 	Linha("");

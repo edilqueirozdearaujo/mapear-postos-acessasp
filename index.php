@@ -93,6 +93,7 @@ include_once "include/leaflet.php";
 	<script src='include/leafletrout.js'></script>
 </head>
 <body>
+
 	<?	
 //		Linha( "<div class='meio'" );
 	   if( isset($NoneNoneNone)) {
