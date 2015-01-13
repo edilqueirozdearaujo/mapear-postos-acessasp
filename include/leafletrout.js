@@ -20,3 +20,21 @@ var layer_StamenWater = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{
 var layer_mapear  = new L.mapbox.featureLayer();
 var layer_editado = new L.mapbox.featureLayer();
 var layer_noosm   = new L.mapbox.featureLayer();
+
+var IconShadow  = 'imagens/markers/shadow.png'; 
+
+var icon_normal = L.icon({ 
+    iconUrl: 'imagens/markers/normal.png',
+    shadowUrl: IconShadow,       
+    iconSize:     [37,44] 
+}); 
+var icon_editado = L.icon({ 
+    iconUrl: 'imagens/markers/editado.png',
+    shadowUrl: IconShadow,       
+    iconSize:     [37,44] 
+}); 
+var icon_noosm = L.icon({ 
+    iconUrl: 'imagens/markers/noosm.png',
+    shadowUrl: IconShadow,            
+    iconSize:     [37,44] 
+}); 

@@ -100,6 +100,7 @@ include_once "include/leaflet.php";
 	   }
 		//Else, is the start
 		else {
+			//Coletar dados
 			DesenharMapa("mapdiv");
 		}		
 

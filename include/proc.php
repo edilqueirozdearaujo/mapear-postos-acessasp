@@ -17,14 +17,53 @@
 	           ."<li> O formulário para relatar problemas com cobertura de imagem serve para sabermos onde há \"falhas\" na cobertura.</li>"
            ."</ul>";
 
+function RetAllResults() {
+	$ExeSQL = FALSE;
+	$TotalDeResultados = 0;
+	$PostosEditados = 0;
+	$PostosNoOSM = 0;
+	$Res = DBServerConnect();
+	if( DBIsConnected($Res)) {
+		if (DBSelect(cDBName)){
+			$SQL = cSQL_AcessaPOIs;
+			$ExeSQL = mysql_query($SQL) or die (mysql_error());
+			$TotalDeResultados = MySQLResults($ExeSQL);
+			if( $TotalDeResultados > 0 ) {
+		      //Calcula status do mapeamento
+				$PostosEditados = MySQLResultsFromSQL("SELECT * FROM ".cTbPostos." WHERE ".cFdPtEdit." = 1;");
+				$PostosNoOSM    = MySQLResultsFromSQL("SELECT * FROM ".cTbPostos." WHERE ".cFdPtOSM." = 1;");
+			}	
+		}
+		DBServerDisconnect($Res);
+	}
+	$Resultado['ExeSQL']        = $ExeSQL; 
+	$Resultado['PostosTotal']   = $TotalDeResultados; 
+	$Resultado['PostosEditados'] = $PostosEditados; 
+	$Resultado['PostosNoOSM']    = $PostosNoOSM; 
+	return $Resultado; 
+}
 
-/*	Linha("			L.marker([-21.4829998016357,-51.5331993103027], {");
-	Linha("				title :'teste de marcador'");
-	Linha("			}).bindPopup('b>TESTE</b><br>teste de marcador').addTo(layer_editado);");
+
+function CriarMarcador($Lat,$Lon,$Layer) {
+	Linha("			L.marker([ $Lat , $Lon], {");
+	Linha("				'icon': icon_normal");
+	Linha("			}).bindPopup('b>TESTE</b><br>teste de marcador').addTo( $Layer );");
 	Linha("						 ");
-*/
+}
 
-function Legenda($PcMapear,$PcEdit,$PcNoosm,$Total) {
+function Legenda($PostosEditados,$PostosNoOSM,$PostosTotal) {
+	$PostosMapear = 0;
+	$PcMapear = 100;
+	$PcEdit       = 0;	
+	$PcNoOSM      = 0;	
+
+	if( $PostosTotal > 0 ) {
+		$PostosMapear = $PostosTotal-$PostosNoOSM;
+		$PcMapear  = floor(RegraD3Percent($PostosTotal,$PostosMapear)); //Se está no OSM já é considerado mapeado 
+		$PcEdit    = floor(RegraD3Percent($PostosTotal,$PostosEditados));
+		$PcNoOSM   = floor(RegraD3Percent($PostosTotal,$PostosNoOSM));
+	}	
+	
 	Linha("	<!-- A legenda é dinâmica, então o estilo também... por isso está aqui 	-->");
 	Linha("	<style>");
 	Linha("			#lgdmapear{");
@@ -36,29 +75,31 @@ function Legenda($PcMapear,$PcEdit,$PcNoosm,$Total) {
 	Linha("			  background:#FE492D;");
 	Linha("			}");
 	Linha("			#lgdnoosm{");
-	Linha("			  width: ".$PcNoosm."%;");
+	Linha("			  width: ".$PcNoOSM."%;");
 	Linha("			  background:#75E775;");
 	Linha("			}");
 	Linha("	</style>");
 	Linha("	<!-- Set the display of this container to none so we can add it programmatically to `legendControl`");
 	Linha("	source: https://www.mapbox.com/mapbox.js/example/v1.0.0/custom-legend/ -->");
 	Linha("	<div id='legend' style='display:none;'>");
-	Linha("	  <strong>Mapeamento dos Postos do Acessa SP</strong>");
+	Linha("	  <strong>Mapeamento dos Postos do Acessa SP | <a href='#'>SOBRE</a></strong>");
 	Linha("	  <nav class='legend clearfix'>");
 	Linha("	    <span id='lgdmapear'></span>");
 	Linha("	    <span id='lgdeditados'></span>");
 	Linha("	    <span id='lgdnoosm'></span>");
-	Linha("	    <label>A mapear: ".$PcMapear."%</label>");
-	Linha("	    <label>Editados: ".$PcEdit  ."%</label>");
-	Linha("	    <label>No mapa:  ".$PcNoosm ."%</label>");
-	Linha("	    <strong>Total: $Total | <b>Pesquisar um posto</b></strong>");
+	Linha("	    A mapear: $PostosMapear <b>(".$PcMapear."%)</b> | ");
+	Linha("	    Editados: $PostosEditados <b>(".$PcEdit  ."%)</b> | ");
+	Linha("	    No mapa:  $PostosNoOSM <b>(".$PcNoOSM ."%)</b> | ");
+	Linha("	    Total: <b>$PostosTotal</b> | <b>Pesquisar um posto</b>");
 	Linha("	  </nav>	    ");
 	Linha("	</div>");
 }
 
 function DesenharMapa($MapDiv) {
-	Legenda(90,2,8,988);
-	
+	$Resultado = RetAllResults();
+	$ExeSQL    = $Resultado['ExeSQL']; 
+
+	Legenda($Resultado['PostosEditados'],$Resultado['PostosNoOSM'],$Resultado['PostosTotal']);
 	
 	Linha("");
 	Linha("	<div id='$MapDiv'></div>");
@@ -89,6 +130,7 @@ function DesenharMapa($MapDiv) {
 	Linha("	");
 	
 	//Marcadores são adicionados aqui 
+CriarMarcador(-21.4829998016357,-51.5331993103027,"layer_editado");	
 
 
 	Linha("");
